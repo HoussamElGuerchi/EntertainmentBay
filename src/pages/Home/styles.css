@@ -1,0 +1,17 @@
+.screen {
+  background-image: url("../../images/cinema_bg.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.content {
+  background-image: linear-gradient(to bottom, #11052c67, #11052c);
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
