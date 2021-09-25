@@ -4,11 +4,11 @@ import "./styles.css";
 
 const Home = () => {
     return (
-        <div className="screen vh-100">
-            <div className="container-fluid p-lg-0 p-4 h-100 content">
-                <div className="h-100 d-flex justify-content-center align-items-center">
-                    <div>
-                        <h3 className="mb-3">Search a movie, tv show or a person</h3>
+        <div className="screen">
+            <div className="vh-100 container-fluid content">
+                <div className="h-100 container center">
+                    <div className="w-75 text-center">
+                        <h3 className="mb-4 text-lg-start">Search a movie, tv show or a person</h3>
                         <SearchForm />
                     </div>
                 </div>

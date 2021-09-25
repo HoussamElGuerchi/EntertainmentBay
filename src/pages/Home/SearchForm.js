@@ -22,7 +22,7 @@ const SearchForm = () => {
                         inputChangeHandler={handleInputChange}
                     />
                 </div>
-                <div className="col-lg-2 col-md-12 text-md-center">
+                <div className="col-lg-2 col-md-12">
                     <button className="btn btn-primary" type="submit">Search</button>
                 </div>
             </div>
