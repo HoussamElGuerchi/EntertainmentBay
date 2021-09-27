@@ -73,6 +73,7 @@ const Results = ({ match }) => {
                     name={(result["media_type"] === "movie") ? result["original_title"] : result.name}
                     poster={(result["media_type"] === "person") ? result["profile_path"] : result["poster_path"]}
                     releaseDate={(result["media_type"] === "movie") ? result["release_date"] : result["first_air_date"]}
+                    vote={(result["media_type"] !== "person") ? result["vote_average"] : null}
                 />)
             }
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import NoImage from "../../images/no_image.png";
 
-const ResultItem = ({ id, poster, mediaType, name, releaseDate }) => {
+const ResultItem = ({ id, poster, mediaType, name, releaseDate, vote }) => {
     const year = releaseDate ? new Date(releaseDate) : null;
 
     return (
@@ -16,6 +16,7 @@ const ResultItem = ({ id, poster, mediaType, name, releaseDate }) => {
             <div className="col-8 py-3">
                 <a className="h3 lh-lg text-decoration-none" href={`/search/result/${id}`}>{name}</a>
                 <p className="text-capitalize">{(year) && `${year.getFullYear()} -`} {mediaType}</p>
+                <p>{vote && `⭐️ ${vote}`}</p>
             </div>
         </div>
     )
