@@ -24,6 +24,7 @@ const SearchForm = () => {
                         type="text"
                         value={searchInput}
                         inputChangeHandler={handleInputChange}
+                        placeholder="Search a movie, tv show or a person ..."
                         required
                     />
                 </div>

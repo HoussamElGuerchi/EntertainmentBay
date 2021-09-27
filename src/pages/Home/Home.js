@@ -8,7 +8,8 @@ const Home = () => {
             <div className="vh-100 container-fluid content">
                 <div className="h-100 container center">
                     <div className="w-75 text-center">
-                        <h3 className="mb-4 text-lg-start">Search a movie, tv show or a person</h3>
+                        <h1 className="text-lg-start">Welcome.</h1>
+                        <h3 className="mb-5 text-lg-start">Millions of movies, TV shows and people to discover. Explore now.</h3>
                         <SearchForm />
                     </div>
                 </div>
