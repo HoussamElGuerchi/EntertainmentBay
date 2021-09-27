@@ -1,8 +1,10 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import Input from '../../components/Input';
 
 const SearchForm = () => {
     const [searchInput, setSearchInput] = React.useState("");
+    let history = useHistory();
 
     function handleInputChange(event) {
         setSearchInput(event.target.value);
@@ -10,6 +12,8 @@ const SearchForm = () => {
 
     function handleSubmit(e) {
         e.preventDefault();
+
+        history.push(`/search/${searchInput}`);
     }
 
     return (
@@ -20,6 +24,7 @@ const SearchForm = () => {
                         type="text"
                         value={searchInput}
                         inputChangeHandler={handleInputChange}
+                        required
                     />
                 </div>
                 <div className="col-lg-2 col-md-12">
