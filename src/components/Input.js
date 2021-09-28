@@ -12,7 +12,7 @@ const Input = ({ name, type, value, id, label, placeholder, required, inputChang
                 placeholder={placeholder}
                 value={value}
                 onChange={inputChangeHandler}
-                required
+                required={required}
             />
         </div>
     )

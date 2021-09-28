@@ -1,3 +1,24 @@
+.results-screen {
+  /* background-image: linear-gradient(-110deg, #667eea 0%, #764ba2 100%); */
+  /* background-image: linear-gradient(
+    to right,
+    #b8cbb8 0%,
+    #b8cbb8 0%,
+    #b465da 0%,
+    #cf6cc9 33%,
+    #ee609c 66%,
+    #ee609c 100%
+  ); */
+  /* background-image: linear-gradient(to right, #6a11cb 0%, #764ba2 100%); */
+  /* background-image: linear-gradient(to top, #9795f0 0%, #fbc8d4 100%); */
+  background-image: linear-gradient(110deg, #7028e4 0%, #e5b2ca 100%);
+  color: white;
+}
+
+.item {
+  overflow: hidden;
+}
+
 .thumbnail {
   width: 100px;
 }
