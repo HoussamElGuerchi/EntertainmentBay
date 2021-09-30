@@ -1,39 +1,79 @@
 import React from "react";
 import axios from "axios";
 import ResultItem from "./ResultItem";
+import Alert from "../../components/Alert";
 import "./styles.css";
 
+
+const API_ENDPOINT = "https://api.themoviedb.org/3/search/multi";
 const API_KEY = "f4d99b3567fb217391c6e1132d107acb";
 
 function capitalize(string) {
     return `${string[0].toUpperCase()}${string.slice(1)}`;
 }
+// Initial State
+const initialState = {
+    data: [],
+    isLoading: false,
+    error: null
+}
+
+// Actions
+const RESULTS_FETCH_INIT = "RESULTS_FETCH_INIT";
+const RESULTS_FETCH_SUCCESS = "RESULTS_FETCH_SUCCESS";
+const RESULTS_FETCH_FAILURE = "RESULTS_FETCH_FAILURE";
+
+// Reducer
+const resultsReducer = (state, action) => {
+    switch (action.type) {
+        case RESULTS_FETCH_INIT:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case RESULTS_FETCH_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                data: action.data
+            };
+        case RESULTS_FETCH_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.error
+            }
+        default: throw new Error("Unhandled results fetch action")
+    };
+}
 
 const Results = ({ match }) => {
-    const [results, setResults] = React.useState([]);
-    const [isLoading, setIsloading] = React.useState(true);
-    const [error, setError] = React.useState();
+    const [results, dispatchResults] = React.useReducer(resultsReducer, initialState);
 
     const searchTerm = capitalize(match.params.searchTerm);
 
-    const url = "https://api.themoviedb.org/3/search/multi";
-
     React.useEffect(() => {
-        axios.get(url, {
+        dispatchResults({
+            type: RESULTS_FETCH_INIT
+        })
+
+        axios.get(API_ENDPOINT, {
             params: {
                 api_key: API_KEY,
                 query: searchTerm
             }
         })
             .then(function (res) {
-                console.log(res.data.results);
-                setResults(res.data.results);
+                dispatchResults({
+                    type: RESULTS_FETCH_SUCCESS,
+                    data: res.data.results
+                })
             })
             .catch(function (err) {
-                console.log(err);
-            })
-            .then(function () {
-                setIsloading(false);
+                dispatchResults({
+                    type: RESULTS_FETCH_FAILURE,
+                    error: "Something went wrong!"
+                })
             })
     }, []);
 
@@ -42,14 +82,20 @@ const Results = ({ match }) => {
             <div className="container w-75 py-5">
                 <h1>{searchTerm}</h1>
                 {
-                    isLoading &&
+                    results.isLoading &&
                     <div class="d-flex align-items-center mt-4">
                         Loading...
                         <div class="spinner-border text-primary ms-auto" role="status" aria-hidden="true"></div>
                     </div>
                 }
                 {
-                    results.map(result => <ResultItem
+                    results.error && <Alert
+                        message={results.error}
+                        dismissible
+                    />
+                }
+                {
+                    results.data.map(result => <ResultItem
                         key={result.id}
                         id={result.id}
                         mediaType={(result["media_type"] === "person") ? result["known_for_department"] : result["media_type"]}
