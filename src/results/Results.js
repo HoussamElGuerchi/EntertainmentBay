@@ -3,14 +3,9 @@ import axios from "axios";
 import ResultItem from "./ResultItem";
 import Alert from "../app/Alert";
 import "./styles.css";
+import reducer from "./reducer";
+import { RESULTS_FETCH_INIT, RESULTS_FETCH_SUCCESS, RESULTS_FETCH_FAILURE } from "./actions";
 
-
-const API_ENDPOINT = "https://api.themoviedb.org/3/search/multi";
-const API_KEY = "f4d99b3567fb217391c6e1132d107acb";
-
-function capitalize(string) {
-    return `${string[0].toUpperCase()}${string.slice(1)}`;
-}
 // Initial State
 const initialState = {
     data: [],
@@ -18,37 +13,16 @@ const initialState = {
     error: null
 }
 
-// Actions
-const RESULTS_FETCH_INIT = "RESULTS_FETCH_INIT";
-const RESULTS_FETCH_SUCCESS = "RESULTS_FETCH_SUCCESS";
-const RESULTS_FETCH_FAILURE = "RESULTS_FETCH_FAILURE";
+// API Configuration
+const API_ENDPOINT = "https://api.themoviedb.org/3/search/multi";
+const API_KEY = "f4d99b3567fb217391c6e1132d107acb";
 
-// Reducer
-const resultsReducer = (state, action) => {
-    switch (action.type) {
-        case RESULTS_FETCH_INIT:
-            return {
-                ...state,
-                isLoading: true
-            };
-        case RESULTS_FETCH_SUCCESS:
-            return {
-                ...state,
-                isLoading: false,
-                data: action.data
-            };
-        case RESULTS_FETCH_FAILURE:
-            return {
-                ...state,
-                isLoading: false,
-                error: action.error
-            }
-        default: throw new Error("Unhandled results fetch action")
-    };
+function capitalize(string) {
+    return `${string[0].toUpperCase()}${string.slice(1)}`;
 }
 
 const Results = ({ match }) => {
-    const [results, dispatchResults] = React.useReducer(resultsReducer, initialState);
+    const [results, dispatchResults] = React.useReducer(reducer, initialState);
 
     const searchTerm = capitalize(match.params.searchTerm);
 
