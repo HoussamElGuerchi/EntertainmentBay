@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import Input from '../../components/Input';
+import Input from '../app/Input';
 
 const SearchForm = () => {
     const [searchInput, setSearchInput] = React.useState("");

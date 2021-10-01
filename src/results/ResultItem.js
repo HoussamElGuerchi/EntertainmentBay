@@ -1,5 +1,5 @@
 import React from 'react';
-import NoImage from "../../images/no_image.png";
+import NoImage from "../images/no_image.png";
 
 const ResultItem = ({ id, poster, mediaType, name, releaseDate, vote }) => {
     const year = releaseDate ? new Date(releaseDate) : null;

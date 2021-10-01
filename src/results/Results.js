@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import ResultItem from "./ResultItem";
-import Alert from "../../components/Alert";
+import Alert from "../app/Alert";
 import "./styles.css";
 
 
