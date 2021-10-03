@@ -5,7 +5,7 @@ const ResultItem = ({ id, poster, mediaType, name, releaseDate, vote }) => {
     const year = releaseDate ? new Date(releaseDate) : null;
 
     return (
-        <div className="my-4 row g-0 shadow rounded-3 bg-secondary item">
+        <div className="my-4 row g-0 shadow-sm border rounded-3 item">
             <div className="col-2">
                 <img
                     src={!poster ? NoImage : `https://image.tmdb.org/t/p/w500${poster}`}

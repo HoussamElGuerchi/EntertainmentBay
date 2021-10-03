@@ -5,6 +5,7 @@ import Alert from "../app/Alert";
 import "./styles.css";
 import reducer from "./reducer";
 import { RESULTS_FETCH_INIT, RESULTS_FETCH_SUCCESS, RESULTS_FETCH_FAILURE } from "./actions";
+import Empty from "../images/empty.jpg";
 
 // Initial State
 const initialState = {
@@ -42,6 +43,7 @@ const Results = ({ match }) => {
                     type: RESULTS_FETCH_SUCCESS,
                     data: res.data.results
                 })
+                // console.log(res.data.results);
             })
             .catch(function (err) {
                 dispatchResults({
@@ -52,7 +54,7 @@ const Results = ({ match }) => {
     }, []);
 
     return (
-        <div className="container-fluid results-screen h-100">
+        <div className="container-fluid results-screen">
             <div className="container w-75 py-5">
                 <h1>{searchTerm}</h1>
                 {
@@ -67,6 +69,13 @@ const Results = ({ match }) => {
                         message={results.error}
                         dismissible
                     />
+                }
+                {
+                    (!results.isLoading && (results.data === undefined || results.data.length == 0)) &&
+                    <div className="container text-center mt-5">
+                        <p>Oops, there are no results that matched your query!</p>
+                        <img src={Empty} alt="No results" className="w-50" />
+                    </div>
                 }
                 {
                     results.data.map(result => <ResultItem
